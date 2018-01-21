@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.*; //titties
 
 public class DiffTool {
 	public SinglyLinkedList ll;
