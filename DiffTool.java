@@ -1,12 +1,13 @@
-import java.util.*; //titties
+import java.util.*;
 
 public class DiffTool {
-	public SinglyLinkedList ll;
-	public ArrayList<String> secondText;
+	public SinglyLinkedList wordList;
+	public ArrayList<String> sentence,paragraph;
 
 	public DiffTool() {
-		ll = new SinglyLinkedList();
-		secondText = new ArrayList<String>();
+		wordList = new SinglyLinkedList();
+		paragraph = new ArrayList<String>();
+		sentence = new ArrayList<String>();
 	}
 
 	public static void main(String[] args) {
@@ -15,13 +16,15 @@ public class DiffTool {
 	} 
 
 	public void run() {
-		String testString = "the quick brown fox";
+		String testString = "the quick brown fox\n titties";
 		String testString2 = "fox and quick brown";
 		
-		parseString(testString);
+		parseParagraph(testString);
+
+		//parseString(testString);
 
 		int stringCode = 0;
-		ListNode temp = ll.first;
+		ListNode temp = wordList.first;
 
 		while (temp != null) {
 			System.out.println("hash code for " + ((Word)(temp.data)).word + " is " + ((Word)(temp.data)).word.hashCode());
@@ -31,10 +34,10 @@ public class DiffTool {
 		}
 
 		// looking at second text file now
-		parseSecondFile(testString2);
+		//parseSentence(testString2);
 		// file added to linked list now
 
-		for (String t: secondText) {
+		for (String t: paragraph) {
 			System.out.println(t);
 		}
 	}	
@@ -47,19 +50,31 @@ public class DiffTool {
 			word = arr[x];
 
 
-			ll.addLast(new Word (word, x));
+			wordList.addLast(new Word (word, x));
 		}
 
-		ll.printList();
+		wordList.printList();
 	}
 
-	public void parseSecondFile(String s) {
-		// String[] splitString = s.split("[\\p{Punct}]+");
+	public void parseSentence(String s) {
 		String[] splitString = s.split("\\.");
 
 		for(String p: splitString) {
-			secondText.add(p);
+			paragraph.add(p);
 		}
+	}
+
+	public void parseParagraph(String s)
+	{
+		System.out.println(s);
+		String [] splitString = s.split("[\\r\\n]+");
+		System.out.println("length of splitstring is " + splitString.length);
+		for(String p: splitString)
+		{
+			System.out.println(p);
+		}
+
+		//for(String )
 	}
 
 	public int generateHashCode(String s) {
